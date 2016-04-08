@@ -1,0 +1,14 @@
+<% include partials/header %>
+
+<h1>This is the Restaurants page!</h1>
+
+<a href="/">Home</a>
+
+<% for (var i=0; i<restaurants.length; i++) { %>
+        <div>
+           <h4><%= restaurants[i].name %></h4>
+           <img src="<%= restaurants[i].image %>">
+        </div>
+<% } %>
+
+<% include partials/footer %>

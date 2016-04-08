@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Edgehead179/FoodiesUnited/issues"
   },
-  "homepage": "https://github.com/Edgehead179/FoodiesUnited#readme"
+  "homepage": "https://github.com/Edgehead179/FoodiesUnited#readme",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4"
+  }
 }
