@@ -2,6 +2,7 @@
 // it accessible via the "app" variable.
 var express = require("express");
 var app = express();
+var Restaurant = require("./models/restaurant");
 
 // Set up mongoDB to be used via Mongoose
 // in JavaScript.
@@ -19,19 +20,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Set up the view engine so we don't have
 // to constantly type ".ejs" extensions.
 app.set("view engine", "ejs");
-
-// Set up Schema. A restaurant consists of
-// a name, image, and description.
-var restaurantSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
-
-// Compile above schema into a model to be used.
-var Restaurant = mongoose.model("Restaurant", restaurantSchema);
-
-
 
 // Set up the homepage. The root path "/"
 // will be rendered as the landing.ejs
