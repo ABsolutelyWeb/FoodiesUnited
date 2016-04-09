@@ -35,6 +35,21 @@ app.set("view engine", "ejs");
 // public.
 app.use(express.static(__dirname + "/public"));
 
+///////////////////////////// PASSPORT CONFIG ///////////////////////////// 
+
+app.use(require("express-session")({
+    secret: "Secret message",
+    resave: false,
+    saveUninitialized: false
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 ///////////////////////////// RESTful ROUTES ///////////////////////////// 
 
