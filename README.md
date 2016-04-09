@@ -9,8 +9,16 @@ other user-related information.
 
 **ALL TECHNOLOGIES INVOLVED:**
 
-**1. IDE:**  * Cloud9 <br />
-**2. Framework:**  * Express.js (w/ NPM packages)   * Bootstrap <br />
-**3. Server Technology:**   * Node.js <br />
-**4. Languages:**   *HTML5   *CSS3   *MongoDB <br />
-**5. Coding Monkey:**   *Me <br />
+**1. IDE:** 
+  *Cloud9 <br />
+**2. Frameworks:** 
+  *Express.js (w/ NPM packages)
+  *Bootstrap <br />
+**3. Server Technology:** 
+  *Node.js <br />
+**4. Languages:**
+  *HTML5
+  *CSS3
+  *MongoDB <br />
+**5. Coding Monkey:** 
+  *Me <br />
