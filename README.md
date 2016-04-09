@@ -9,8 +9,8 @@ other user-related information.
 
 All technologies involved:
 
-IDE: Cloud9
-Framework: Express.js
-Server: Node.js
-Languages: HTML5, CSS3, Bootstrap, NPM packages, MongoDB
-Coding Monkey: Me
+IDE: Cloud9 <br />
+Framework: Express.js <br />
+Server: Node.js <br />
+Languages: HTML5, CSS3, Bootstrap, NPM packages, MongoDB <br />
+Coding Monkey: Me <br />
