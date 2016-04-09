@@ -12,13 +12,13 @@ other user-related information.
 **1. IDE:** 
   *Cloud9 <br />
 **2. Frameworks:** 
-  *Express.js (w/ NPM packages)
-  *Bootstrap <br />
+  + Express.js (w/ NPM packages)
+  + Bootstrap <br />
 **3. Server Technology:** 
-  *Node.js <br />
+  + Node.js <br />
 **4. Languages:**
-  *HTML5
-  *CSS3
-  *MongoDB <br />
+  + HTML5
+  + CSS3
+  + MongoDB <br />
 **5. Coding Monkey:** 
-  *Me <br />
+  + Me <br />
