@@ -4,8 +4,11 @@ var express = require("express");
 var app = express();
 var Restaurant = require("./models/restaurant");
 var seedDB = require("./seeds");
+var Comment = require("./models/comment");
+
 
 seedDB();
+
 // Set up mongoDB to be used via Mongoose
 // in JavaScript.
 var mongoose = require("mongoose");
@@ -24,6 +27,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 
+
+///////////////////////////// RESTful ROUTES ///////////////////////////// 
 
 // Set up the homepage. The root path "/"
 // will be rendered as the landing.ejs
@@ -54,7 +59,7 @@ app.get("/restaurants", function(req, res) {
             // Render the restaurants.ejs file,
             // grab data from passed in restaurants
             // argument.
-            res.render("index", {restaurants: allRestaurants});
+            res.render("restaurants/index", {restaurants: allRestaurants});
         }
     });
 });
@@ -91,7 +96,7 @@ app.post("/restaurants", function(req, res) {
 // NEW route - show form to create new restaurant
 // Form URL for adding restaurants.
 app.get("/restaurants/new", function(req, res) {
-    res.render("new");
+    res.render("restaurants/new");
 });
 
 
@@ -106,9 +111,49 @@ app.get("/restaurants/:id", function(req, res) {
         } else {
             console.log(foundRestaurant);
             // Render SHOW template with that restaurant.
-            res.render("show", {restaurant: foundRestaurant});
+            res.render("restaurants/show", {restaurant: foundRestaurant});
         }
     }); 
+});
+
+
+
+/////////////////////////////// COMMENTS /////////////////////////////// 
+
+app.get("/restaurants/:id/comments/new", function(req, res) {
+    // Find restaurant by id and then also render the comments form.
+    Restaurant.findById(req.params.id, function(err, restaurant){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("comments/new", {restaurant: restaurant});
+        }
+    });
+});
+
+
+
+app.post("/restaurants/:id/comments", function(req, res) {
+    // Find restaurant by id.
+    Restaurant.findById(req.params.id, function(err, restaurant){
+        if (err) {
+            console.log(err);
+            res.redirect("/restaurants");
+        } else {
+            Comment.create(req.body.comment, function(err, comment){
+                if (err) {
+                    console.log(err);
+                } else {
+                    restaurant.comments.push(comment);
+                    restaurant.save();
+                    res.redirect("/restaurants/" + restaurant._id);
+                }
+            });
+        }
+    });
+    // Create new comment.
+    // Connect the new comment to the relevant retaurant.
+    // Redirect to the restaurants show route.
 });
 
 

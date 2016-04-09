@@ -1,13 +1,15 @@
-<% include partials/header %>
+<% include ../partials/header %>
 <h1><%=restaurant.name%></h1>
 
 <img src="<%= restaurant.image %>">
 
 <p><%= restaurant.description %></p>
 
+<p><a class="btn btn-success" href="/restaurants/<%= restaurant._id %>/comments/new">What Do You Think?</a></p>
+
 <% restaurant.comments.forEach(function(comment){ %>
         <p>
             <strong><%= comment.author %></strong> - <%= comment.text %>
         </p>
-<% }) %>
-<% include partials/footer %>
+<% }); %>
+<% include ../partials/footer %>
