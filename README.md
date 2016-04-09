@@ -24,6 +24,7 @@ other user-related information.
 **4. Languages:**
   + HTML5
   + CSS3
+  + JavaScript
 
 **5. Database:**
   + MongoDB
