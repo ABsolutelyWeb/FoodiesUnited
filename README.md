@@ -10,7 +10,7 @@ other user-related information.
 **ALL TECHNOLOGIES INVOLVED:**
 
 **IDE:** Cloud9 <br />
-**Framework:** Express.js <br />
+**Framework:** Express.js (w/ NPM packages) & Bootstrap <br />
 **Server Technology:** Node.js <br />
-**Languages:** HTML5, CSS3, Bootstrap, NPM packages, MongoDB <br />
+**Languages:** HTML5, CSS3, & MongoDB <br />
 **Coding Monkey:** Me <br />
