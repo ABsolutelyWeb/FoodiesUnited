@@ -32,12 +32,14 @@ var restaurantSchema = new mongoose.Schema({
 var Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
 
+
 // Set up the homepage. The root path "/"
 // will be rendered as the landing.ejs
 // located in the views directory.
 app.get("/", function(req, res){
     res.render("landing");
 });
+
 
 
 // INDEX route - Show all restaurants.
@@ -91,6 +93,7 @@ app.post("/restaurants", function(req, res) {
         }
     });
 });
+
 
 
 // NEW route - show form to create new restaurant
