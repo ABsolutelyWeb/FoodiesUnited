@@ -2,10 +2,15 @@
 // it accessible via the "app" variable.
 var express = require("express");
 var app = express();
+
+// Set up Passport for authentication.
+var passport = require("passport");
+var localStrategy = require("passport-local");
+var User = require("./models/user");
+
 var Restaurant = require("./models/restaurant");
 var seedDB = require("./seeds");
 var Comment = require("./models/comment");
-
 
 seedDB();
 
