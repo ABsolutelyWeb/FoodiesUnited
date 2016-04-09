@@ -26,6 +26,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 // to constantly type ".ejs" extensions.
 app.set("view engine", "ejs");
 
+// Look at the current directory and then find
+// public.
+app.use(express.static(__dirname + "/public"));
 
 
 ///////////////////////////// RESTful ROUTES ///////////////////////////// 
