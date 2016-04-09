@@ -3,7 +3,9 @@
 var express = require("express");
 var app = express();
 var Restaurant = require("./models/restaurant");
+var seedDB = require("./seeds");
 
+seedDB();
 // Set up mongoDB to be used via Mongoose
 // in JavaScript.
 var mongoose = require("mongoose");
@@ -20,6 +22,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Set up the view engine so we don't have
 // to constantly type ".ejs" extensions.
 app.set("view engine", "ejs");
+
+
 
 // Set up the homepage. The root path "/"
 // will be rendered as the landing.ejs
@@ -96,10 +100,11 @@ app.get("/restaurants/new", function(req, res) {
 // AFTER /new *IMPORTANT
 app.get("/restaurants/:id", function(req, res) {
     // Find restaurant with the ID
-    Restaurant.findById(req.params.id, function(err, foundRestaurant) {
+    Restaurant.findById(req.params.id).populate("comments").exec(function(err, foundRestaurant) {
         if (err) {
             console.log(err);
         } else {
+            console.log(foundRestaurant);
             // Render SHOW template with that restaurant.
             res.render("show", {restaurant: foundRestaurant});
         }
