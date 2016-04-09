@@ -4,13 +4,13 @@ used Node.js through the Express.js framework to design the 7 RESTful routes to 
 allows users to post their favorite restaurants (name, image, description). Each posted restaurant has its 
 own show page (restaurant/:id) where users can go to view the restaurant's description and comments as well
 as leave a comment. The app also has a user authentication system and posts/comments are linked to the 
-relevant user. MongoDB is used for all database-related mumbo-jumbos such as storing posts, comments, and 
+relevant user. MongoDB is used for all database-related mumbo-jumbo such as storing posts, comments, and 
 other user-related information.
 
-All technologies involved:
+**ALL TECHNOLOGIES INVOLVED:**
 
-IDE: Cloud9 <br />
-Framework: Express.js <br />
-Server: Node.js <br />
-Languages: HTML5, CSS3, Bootstrap, NPM packages, MongoDB <br />
-Coding Monkey: Me <br />
+**IDE:** Cloud9 <br />
+**Framework:** Express.js <br />
+**Server Technology:** Node.js <br />
+**Languages:** HTML5, CSS3, Bootstrap, NPM packages, MongoDB <br />
+**Coding Monkey:** Me <br />
