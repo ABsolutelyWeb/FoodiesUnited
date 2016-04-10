@@ -4,3 +4,4 @@ npm install body-parser --save
 npm install mongoose --save
 npm install express-session --save
 npm install passport passport-local passport-local-mongoose --save
+npm install method-override --save

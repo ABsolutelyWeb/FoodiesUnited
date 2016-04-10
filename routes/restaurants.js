@@ -88,6 +88,40 @@ router.get("/:id", function(req, res) {
     }); 
 });
 
+
+
+// EDIT ROUTE: Send user to the edit
+// form to edit contents of the post.
+// GET request.
+router.get("/:id/edit", function(req, res) {
+    Restaurant.findById(req.params.id, function(err, foundRestaurant) {
+        if (err) {
+            res.redirect("/restaurants");
+        } else {
+            res.render("restaurants/edit", {restaurant: foundRestaurant});
+        }            
+    });
+});
+
+
+
+// UPDATE ROUTE: This takes the user's
+// submitted edit content and updates
+// the post with it.
+// PUT request.
+router.put("/:id", function(req, res) {
+    // Find and update the right restaurant
+    // and then redirect to the show page.
+    Restaurant.findByIdAndUpdate(req.params.id, req.body.restaurant, function(err, updatedRests) {
+        if (err) {
+            res.redirect("/restaurants");
+        } else {
+            res.redirect("/restaurants/" + req.params.id);
+        }
+    });
+});
+
+
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();

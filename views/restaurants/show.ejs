@@ -17,6 +17,7 @@
                     <h4><a><%=restaurant.name%></a></h4>
                     <h5><em>Shared by <%= restaurant.author.username %></em></h5>
                     <p><%= restaurant.description %></p>
+                    <a class="btn btn-warning" href="/restaurants/<%= restaurant._id %>/edit">Edit Post</a>
                 </div>
             </div> 
             <div class="well">

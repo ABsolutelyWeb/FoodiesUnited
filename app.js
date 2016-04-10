@@ -19,6 +19,9 @@ var authRoutes = require("./routes/index");
 
 //seedDB();
 
+var methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
 // Set up mongoDB to be used via Mongoose
 // in JavaScript.
 var mongoose = require("mongoose");
