@@ -21,7 +21,11 @@
             </div> 
             <div class="well">
                 <div class="text-right">
-                    <a class="btn btn-success" href="/restaurants/<%= restaurant._id %>/comments/new">What Do You Think?</a>
+                    <% if (!currentUser) { %>
+                        <a class="btn btn-success" href="/login">Login to Comment</a>
+                    <% } else {%>    
+                        <a class="btn btn-success" href="/restaurants/<%= restaurant._id %>/comments/new">What Do You Think?</a>
+                    <% } %>
                 </div>
                 
                 <hr>
