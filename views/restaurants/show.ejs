@@ -17,7 +17,21 @@
                     <h4><a><%=restaurant.name%></a></h4>
                     <h5><em>Shared by <%= restaurant.author.username %></em></h5>
                     <p><%= restaurant.description %></p>
-                    <a class="btn btn-warning" href="/restaurants/<%= restaurant._id %>/edit">Edit Post</a>
+                    <!--<a class="btn btn-warning" href="/restaurants/<%= restaurant._id %>/edit">Edit Post</a>-->
+                    <a class="btn icon-btn btn-warning" href="/restaurants/<%= restaurant._id %>/edit">
+                        <span class="glyphicon btn-glyphicon glyphicon-pencil img-circle text-warning"></span>
+                        Edit
+                    </a>
+                   
+                    
+                    <form id="delete-form" action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
+                        <!--<button class="btn btn-danger">Delete Post</button>-->
+                        <button class="btn icon-btn btn-danger">
+                            <span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>
+                            Delete
+                        </button>
+                    </form>
+                    
                 </div>
             </div> 
             <div class="well">
