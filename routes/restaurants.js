@@ -93,13 +93,9 @@ router.get("/:id", function(req, res) {
 // EDIT ROUTE: Send user to the edit
 // form to edit contents of the post.
 // GET request.
-router.get("/:id/edit", function(req, res) {
+router.get("/:id/edit", checkAuth, function(req, res) {
     Restaurant.findById(req.params.id, function(err, foundRestaurant) {
-        if (err) {
-            res.redirect("/restaurants");
-        } else {
-            res.render("restaurants/edit", {restaurant: foundRestaurant});
-        }            
+        res.render("restaurants/edit", {restaurant: foundRestaurant});
     });
 });
 
@@ -109,7 +105,7 @@ router.get("/:id/edit", function(req, res) {
 // submitted edit content and updates
 // the post with it.
 // PUT request.
-router.put("/:id", function(req, res) {
+router.put("/:id", checkAuth, function(req, res) {
     // Find and update the right restaurant
     // and then redirect to the show page.
     Restaurant.findByIdAndUpdate(req.params.id, req.body.restaurant, function(err, updatedRests) {
@@ -126,7 +122,7 @@ router.put("/:id", function(req, res) {
 // DESTROY ROUTE: Delete the selected post
 // as long as it belongs to the specified
 // user.
-router.delete("/:id", function(req, res) {
+router.delete("/:id", checkAuth, function(req, res) {
     Restaurant.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
             res.redirect("/restaurants");
@@ -136,6 +132,27 @@ router.delete("/:id", function(req, res) {
     });
 });
 
+
+function checkAuth(req, res, next) {
+    // Check if user is logged in. Then check if
+    // owner is the author of the post.
+    if (req.isAuthenticated()) {
+        Restaurant.findById(req.params.id, function(err, foundRestaurant) {
+            if (err) {
+                res.redirect("back");
+                
+            } else if (foundRestaurant.author.id.equals(req.user._id)) {
+               next();
+                
+            } else{
+                res.redirect("back");
+            }   
+        });
+    
+    } else {
+        res.redirect("back");
+    }
+}
 
 
 function isLoggedIn(req, res, next) {
