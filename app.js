@@ -35,6 +35,7 @@ app.set("view engine", "ejs");
 // public.
 app.use(express.static(__dirname + "/public"));
 
+
 ///////////////////////////// PASSPORT CONFIG ///////////////////////////// 
 
 app.use(require("express-session")({
@@ -49,6 +50,7 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 
 ///////////////////////////// RESTful ROUTES ///////////////////////////// 
@@ -180,6 +182,47 @@ app.post("/restaurants/:id/comments", function(req, res) {
 });
 
 
+
+/////////////////////////////// AUTH ROUTES /////////////////////////////// 
+
+// Show register form
+app.get("/register", function(req, res) {
+    res.render("register");
+});
+
+
+// Handle Sign-Up
+app.post("/register", function(req, res) {
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if (err) {
+           console.log(err);
+           return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+           res.redirect("/restaurants");
+        });
+    });
+});
+
+
+// Login Form
+app.get("/login", function(req, res) {
+    res.render("login");
+});
+
+// Login Logic
+app.post("/login", passport.authenticate("local", 
+{
+    successRedirect: "/restaurants", 
+    failureRedirect: "/login"
+    
+}), function(req, res) {
+    
+});
+
+
+/////////////////////////////// SERVER /////////////////////////////// 
 
 // Set up the server port in Cloud9. When Cloud9 
 // IDE runs servers, you set and retrieve the IP 
