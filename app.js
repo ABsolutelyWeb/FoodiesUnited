@@ -17,7 +17,7 @@ var commRoutes = require("./routes/comments");
 var restRoutes = require("./routes/restaurants");
 var authRoutes = require("./routes/index");
 
-seedDB();
+//seedDB();
 
 // Set up mongoDB to be used via Mongoose
 // in JavaScript.

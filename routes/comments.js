@@ -29,20 +29,26 @@ router.post("/", isLoggedIn, function(req, res) {
             console.log(err);
             res.redirect("/restaurants");
         } else {
+            // Create new comment.
             Comment.create(req.body.comment, function(err, comment){
                 if (err) {
                     console.log(err);
                 } else {
+                    // Add username and id to comment.
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    // Save comment.
+                    comment.save();
+                    // Connect the new comment to the relevant retaurant.
                     restaurant.comments.push(comment);
+                    // Save the restaurant's data.
                     restaurant.save();
+                    // Redirect to the restaurants show route.
                     res.redirect("/restaurants/" + restaurant._id);
                 }
             });
         }
     });
-    // Create new comment.
-    // Connect the new comment to the relevant retaurant.
-    // Redirect to the restaurants show route.
 });
 
 

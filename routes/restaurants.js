@@ -37,16 +37,20 @@ router.get("/", function(req, res) {
 // CREATE route - add new restaurant to DB
 // Post route for new.ejs to push form data into
 // restaurants objects array.
-router.post("/", function(req, res) {
+router.post("/", isLoggedIn, function(req, res) {
     // Get data from form body and add to restaurants 
     // database.
     var name = req.body.name;    // Request name data from form body.
     var image = req.body.image;  // Request image data from form body.
     var description = req.body.description;  // Request description data from form body.
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    };
     
     // Define a newRestaurant object array of
     // what a restaurant consists of.
-    var newRestaurant = {name: name, image: image, description: description};
+    var newRestaurant = {name: name, image: image, description: description, author: author};
     // Create new restaurant and save to database.
     Restaurant.create(newRestaurant, function(err, newlyAdded){
         if (err) {
@@ -63,7 +67,7 @@ router.post("/", function(req, res) {
 
 // NEW route - show form to create new restaurant
 // Form URL for adding restaurants.
-router.get("/new", function(req, res) {
+router.get("/new", isLoggedIn, function(req, res) {
     res.render("restaurants/new");
 });
 
@@ -83,5 +87,12 @@ router.get("/:id", function(req, res) {
         }
     }); 
 });
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router;
