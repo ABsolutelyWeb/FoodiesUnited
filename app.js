@@ -53,6 +53,14 @@ passport.deserializeUser(User.deserializeUser());
 
 
 
+// Allows currentUser to be a part of every route.
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+});
+
+
+
 ///////////////////////////// RESTful ROUTES ///////////////////////////// 
 
 // Set up the homepage. The root path "/"
@@ -145,7 +153,7 @@ app.get("/restaurants/:id", function(req, res) {
 
 /////////////////////////////// COMMENTS /////////////////////////////// 
 
-app.get("/restaurants/:id/comments/new", function(req, res) {
+app.get("/restaurants/:id/comments/new", isLoggedIn, function(req, res) {
     // Find restaurant by id and then also render the comments form.
     Restaurant.findById(req.params.id, function(err, restaurant){
         if (err) {
@@ -158,7 +166,7 @@ app.get("/restaurants/:id/comments/new", function(req, res) {
 
 
 
-app.post("/restaurants/:id/comments", function(req, res) {
+app.post("/restaurants/:id/comments", isLoggedIn, function(req, res) {
     // Find restaurant by id.
     Restaurant.findById(req.params.id, function(err, restaurant){
         if (err) {
@@ -184,6 +192,7 @@ app.post("/restaurants/:id/comments", function(req, res) {
 
 
 /////////////////////////////// AUTH ROUTES /////////////////////////////// 
+
 
 // Show register form
 app.get("/register", function(req, res) {
@@ -211,6 +220,7 @@ app.get("/login", function(req, res) {
     res.render("login");
 });
 
+
 // Login Logic
 app.post("/login", passport.authenticate("local", 
 {
@@ -221,6 +231,19 @@ app.post("/login", passport.authenticate("local",
     
 });
 
+
+// Logout Logic
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/restaurants");
+});
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 /////////////////////////////// SERVER /////////////////////////////// 
 

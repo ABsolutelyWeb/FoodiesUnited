@@ -2,6 +2,7 @@
 <html>
     <head>
     	<title>Foodies United</title>
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     	<link rel="stylesheet" href="/stylesheets/main.css">
     	<link rel="stylesheet" href="/stylesheets/hover-min.css" media="all">
@@ -12,13 +13,17 @@
     <nav class = "navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">Foodies United</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-cutlery"></i> Foodies United</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Sign Up</a></li>
-                    <li><a href="/">Logout</a></li>
+                    <% if (!currentUser) { %>
+                           <li><a href="/login">Login</a></li>
+                           <li><a href="/register">Sign Up</a></li>
+                    <% } else {%>
+                           <li><a href="#">Hello, <%= currentUser.username %></a></li>
+                           <li><a href="/logout">Logout</a></li>
+                    <% } %>
                 </ul>
             </div>
         </div>

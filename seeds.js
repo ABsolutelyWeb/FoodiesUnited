@@ -1,3 +1,7 @@
+// This file is for manually creating a few sample posts and comments
+// which occur each time we start the server. This gives us sample 
+// data to work with.
+
 // Set up mongoDB to be used via Mongoose
 // in JavaScript.
 var mongoose = require("mongoose");
