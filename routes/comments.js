@@ -53,7 +53,7 @@ router.post("/", isLoggedIn, function(req, res) {
 
 
 // EDIT ROUTE for comments which takes us to a form.
-router.get("/:comment_id/edit", function(req, res) {
+router.get("/:comment_id/edit", commentAuth, function(req, res) {
     Comment.findById(req.params.comment_id, function(err, foundComment) {
         if (err) {
             res.redirect("back");
@@ -66,7 +66,7 @@ router.get("/:comment_id/edit", function(req, res) {
 
 // UPDATE ROUTE for comments which takes our form input
 // and updates the comment text.
-router.put("/:comment_id", function(req, res) {
+router.put("/:comment_id", commentAuth, function(req, res) {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment) {
         if (err) {
             res.redirect("back");
@@ -77,9 +77,8 @@ router.put("/:comment_id", function(req, res) {
 });
 
 
-
 // DESTROY route for comments.
-router.delete("/:comment_id", function(req, res) {
+router.delete("/:comment_id", commentAuth, function(req, res) {
     Comment.findByIdAndRemove(req.params.comment_id, function(err) {
         if (err) {
             res.redirect("back");
@@ -89,6 +88,27 @@ router.delete("/:comment_id", function(req, res) {
     });
 });
 
+
+function commentAuth(req, res, next) {
+    // Check if user is logged in. Then check if
+    // owner is the author of the post.
+    if (req.isAuthenticated()) {
+        Comment.findById(req.params.comment_id, function(err, foundComment) {
+            if (err) {
+                res.redirect("back");
+                
+            } else if (foundComment.author.id.equals(req.user._id)) {
+               next();
+                
+            } else{
+                res.redirect("back");
+            }   
+        });
+    
+    } else {
+        res.redirect("back");
+    }
+}
 
 
 function isLoggedIn(req, res, next) {
