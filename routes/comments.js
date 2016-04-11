@@ -44,6 +44,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
                     restaurant.comments.push(comment);
                     // Save the restaurant's data.
                     restaurant.save();
+                    req.flash("success", "Comment successfully created!");
                     // Redirect to the restaurants show route.
                     res.redirect("/restaurants/" + restaurant._id);
                 }
@@ -84,6 +85,7 @@ router.delete("/:comment_id", middleware.commentAuth, function(req, res) {
         if (err) {
             res.redirect("back");
         } else {
+            req.flash("success", "Comment deleted.");
             res.redirect("/restaurants/" + req.params.id);
         }
     });
