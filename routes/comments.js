@@ -5,10 +5,11 @@ var express = require("express");
 var router = express.Router({mergeParams: true}); // Merges params from restaurants and comments so we can access the comments id.
 var Restaurant = require("../models/restaurant");
 var Comment = require("../models/comment");
+var middleware = require("../middleware/");
 
 
 // NEW route for comments
-router.get("/new", isLoggedIn, function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
     // Find restaurant by id and then also render the comments form.
     Restaurant.findById(req.params.id, function(err, restaurant){
         if (err) {
@@ -22,7 +23,7 @@ router.get("/new", isLoggedIn, function(req, res) {
 
 
 // CREATE route for comments
-router.post("/", isLoggedIn, function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
     // Find restaurant by id.
     Restaurant.findById(req.params.id, function(err, restaurant){
         if (err) {
@@ -53,7 +54,7 @@ router.post("/", isLoggedIn, function(req, res) {
 
 
 // EDIT ROUTE for comments which takes us to a form.
-router.get("/:comment_id/edit", commentAuth, function(req, res) {
+router.get("/:comment_id/edit", middleware.commentAuth, function(req, res) {
     Comment.findById(req.params.comment_id, function(err, foundComment) {
         if (err) {
             res.redirect("back");
@@ -66,7 +67,7 @@ router.get("/:comment_id/edit", commentAuth, function(req, res) {
 
 // UPDATE ROUTE for comments which takes our form input
 // and updates the comment text.
-router.put("/:comment_id", commentAuth, function(req, res) {
+router.put("/:comment_id", middleware.commentAuth, function(req, res) {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment) {
         if (err) {
             res.redirect("back");
@@ -78,7 +79,7 @@ router.put("/:comment_id", commentAuth, function(req, res) {
 
 
 // DESTROY route for comments.
-router.delete("/:comment_id", commentAuth, function(req, res) {
+router.delete("/:comment_id", middleware.commentAuth, function(req, res) {
     Comment.findByIdAndRemove(req.params.comment_id, function(err) {
         if (err) {
             res.redirect("back");
@@ -87,36 +88,6 @@ router.delete("/:comment_id", commentAuth, function(req, res) {
         }
     });
 });
-
-
-function commentAuth(req, res, next) {
-    // Check if user is logged in. Then check if
-    // owner is the author of the post.
-    if (req.isAuthenticated()) {
-        Comment.findById(req.params.comment_id, function(err, foundComment) {
-            if (err) {
-                res.redirect("back");
-                
-            } else if (foundComment.author.id.equals(req.user._id)) {
-               next();
-                
-            } else{
-                res.redirect("back");
-            }   
-        });
-    
-    } else {
-        res.redirect("back");
-    }
-}
-
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
 
 
 module.exports = router;
