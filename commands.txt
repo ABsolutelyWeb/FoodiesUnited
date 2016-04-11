@@ -5,3 +5,5 @@ npm install mongoose --save
 npm install express-session --save
 npm install passport passport-local passport-local-mongoose --save
 npm install method-override --save
+npm install connect-flash --save
+npm install --save connect-flash

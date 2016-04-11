@@ -57,6 +57,7 @@ router.post("/login", passport.authenticate("local",
 // Logout Logic
 router.get("/logout", function(req, res) {
     req.logout();
+    req.flash("success", "You are logged out.");
     res.redirect("/restaurants");
 });
 
@@ -67,5 +68,6 @@ function isLoggedIn(req, res, next) {
     }
     res.redirect("/login");
 }
+
 
 module.exports = router;

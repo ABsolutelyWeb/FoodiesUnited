@@ -17,6 +17,9 @@ var commRoutes = require("./routes/comments");
 var restRoutes = require("./routes/restaurants");
 var authRoutes = require("./routes/index");
 
+var flash = require("connect-flash");
+app.use(flash());
+
 //seedDB();
 
 var methodOverride = require("method-override");
@@ -43,7 +46,6 @@ app.set("view engine", "ejs");
 // public.
 app.use(express.static(__dirname + "/public"));
 
-
 ///////////////////////////// PASSPORT CONFIG ///////////////////////////// 
 
 app.use(require("express-session")({
@@ -64,6 +66,8 @@ passport.deserializeUser(User.deserializeUser());
 // Allows currentUser to be a part of every route.
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 
