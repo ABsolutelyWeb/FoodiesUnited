@@ -1,0 +1,69 @@
+body {
+    background: url(https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=ee0e1e6f2902c4b2338bf54ee31ce2ba);
+    background-size: cover;
+    background-position: center; 
+    transition: background 1.0s linear;
+    -webkit-backface-visibility: hidden;
+    webkit-transition: background-image 1.0s linear;
+    -webkit-transform:translate3d(0,0,0);
+}
+
+.bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    font-family: "Pacifico";
+    color: white;
+}
+
+h1 {
+	font-weight: 500;
+	font-size: 9em;
+}
+
+h3 {
+    font-weight: 400;
+	font-size: 3em;
+}
+
+.content{
+	padding-top: 10%;
+	text-align: center;
+}
+
+.content h1, .content h3{
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+hr {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.btn-xlarge {
+    padding: 8px 10px;
+    font-size: 1px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+}
+
+.big-icon {
+    font-size: 30px;
+}
+
+.big-font {
+    font-size: 25px;
+}
