@@ -30,8 +30,8 @@ app.use(methodOverride("_method"));
 var mongoose = require("mongoose");
 
 // Connect Mongoose.
-// mongoose.connect("mongodb://localhost/foodies_united");
-mongoose.connect("mongodb://Edgehead179:Wilsonb1345@ds023490.mlab.com:23490/foodiesunited");
+mongoose.connect("mongodb://localhost/foodies_united");
+
 
 // This Node.js body parsing middleware is
 // used to utilize the URL-encoded parser
