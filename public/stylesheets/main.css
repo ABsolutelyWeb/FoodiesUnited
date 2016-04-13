@@ -1,5 +1,9 @@
 body { padding-top: 70px; }
 
+#pacifco {
+    font-family: "Pacifico";
+}
+
 #delete-form {
     display: inline;
 }
